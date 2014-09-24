@@ -1,0 +1,1 @@
+powershell.exe -NoProfile -ExecutionPolicy unrestricted -Command ".\scripts\setup.ps1 %*"
