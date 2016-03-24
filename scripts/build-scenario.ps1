@@ -1,7 +1,7 @@
 properties {
     $ProjectDir = Resolve-Path ".\.."
-    $nuget = "$ProjectDir\.nuget\nuget.exe"
     $PackagesDir = "$ProjectDir\packages"
+    $nunit = "$ProjectDir\packages\NUnit.ConsoleRunner\tools\nunit3-console.exe"
     $Configuration = "Debug"
     $Solution = "$ProjectDir\Solution.sln"
 }
@@ -20,7 +20,6 @@ task Clean {
 
 task Build -depends Clean, Init {
     Push-Location $ProjectDir
-    # & $nuget restore
     exec {
         msbuild $Solution `
                 /t:Rebuild `
@@ -30,4 +29,9 @@ task Build -depends Clean, Init {
                 /m 
     }
     Pop-Location
+}
+
+task Tests -depends Init {
+    $tests = (Get-ChildItem $OutDir -Recurse -Include *Tests.dll)
+    exec { & $nunit $tests --noheader --framework=net-4.5 --work=$OutDir }
 }
