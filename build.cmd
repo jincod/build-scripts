@@ -1,1 +1,1 @@
-powershell.exe -NoProfile -ExecutionPolicy unrestricted -Command ".\scripts\setup.ps1 %*"
+powershell.exe -NoProfile -ExecutionPolicy unrestricted -Command "& {.\scripts\setup.ps1;Import-Module '.\packages\psake\tools\psake.psm1';invoke-psake .\scripts\build-scenario.ps1 %*;if($psake.build_success -eq $false){write-host 'ERROR!!!' -fore RED;     $exitCode = 1;}else{write-host 'Success!' -fore GREEN;$exitCode = 0;}remove-module psake;exit $exitCode;}"
