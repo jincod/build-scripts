@@ -5,7 +5,7 @@ if(!(Test-Path .nuget\nuget.exe))
         New-Item -type directory .nuget
     }
 
-    Invoke-WebRequest http://www.nuget.org/nuget.exe -OutFile .nuget\nuget.exe
+    Invoke-WebRequest https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -OutFile .nuget\nuget.exe
 }
 if(!(Test-Path .\packages\psake))
 {
