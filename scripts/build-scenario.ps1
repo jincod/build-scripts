@@ -14,7 +14,11 @@ task Init {
 
 task Clean {
     Push-Location $ProjectDir
-    exec -maxRetries 3 { gci . -Include bin,debug,obj,*.orig -Recurse | ri -Recurse -Force }
+    exec -maxRetries 3 {
+        gci . -Include bin,debug,obj -Recurse |
+            ? { $_.FullName -inotmatch "node_modules" } |
+            ri -Recurse -Force
+    }
     Pop-Location
 }
 
