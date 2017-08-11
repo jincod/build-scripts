@@ -14,6 +14,5 @@ function downloadWithConfirm ($url, $out) {
     }
 }
 
-downloadWithConfirm http://cakebuild.net/download/bootstrapper/windows build.ps1
 downloadWithConfirm "${baseUrl}/build-scripts/build.cake" build.cake
 downloadWithConfirm "${baseUrl}/build-scripts/build.cmd" build.cmd
