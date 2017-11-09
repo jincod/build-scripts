@@ -1,3 +1,4 @@
 packages 
 .nuget
-tools
+tools/**
+!tools/packages.config
